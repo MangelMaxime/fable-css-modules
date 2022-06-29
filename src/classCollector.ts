@@ -166,6 +166,10 @@ export class ClassCollector {
     }
 
     async writeToFile() {
+        if (this._modules.length == 0) {
+            return;
+        }
+
         let sb = new StringBuilder();
 
         const internalPrefix = this._internal ? "internal " : "";
