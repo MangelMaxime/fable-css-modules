@@ -11,7 +11,7 @@ open Fable.Core
 open Feliz
 
 // Import the CSS module
-let private classes : CssModules.Components.QRCode.Classes = import "default" "./QRCode.module.scss"
+let private classes : CssModules.Components.QRCode = import "default" "./QRCode.module.scss"
 
 [<ReactComponent>]
 let QRCode () =
@@ -70,33 +70,30 @@ If you invoke `npx fcm` in the `src` folder, a file `src/CssModules.fs` will be 
 //        Changes to this file will be lost when the code is regenerated.
 //-----------------------------------------------------------------------------
 
-module CssModules
+[<RequireQualifiedAccess>]
+module internal CssModules
 
 open Fable.Core
 
 module Components =
 
-    module QRCode =
+    type QRCode =
 
-        type Classes =
-
-            /// <summary>
-            /// Binding for <c>qr-code</c> class
-            /// </summary>
-            [<Emit("$0[\"qr-code\"]")>]
-            abstract qrCode : string
+        /// <summary>
+        /// Binding for <c>qr-code</c> class
+        /// </summary>
+        [<Emit("$0[\"qr-code\"]")>]
+        abstract qrCode : string
 
     module User =
 
-        module History =
+        type History =
 
-            type Classes =
-
-                /// <summary>
-                /// Binding for <c>history-container</c> class
-                /// </summary>
-                [<Emit("$0[\"history-container\"]")>]
-                abstract history-container : string
+            /// <summary>
+            /// Binding for <c>history-container</c> class
+            /// </summary>
+            [<Emit("$0[\"history-container\"]")>]
+            abstract history-container : string
 ```
 
 You should now add `<Compile Include="CssModules.fs" />` to your fsproj file.
@@ -111,7 +108,7 @@ module Components.QRCode
 open Fable.Core
 open Feliz
 
-let private classes : CssModules.Components.QRCode.Classes = import "default" "./QRCode.module.scss"
+let private classes : CssModules.Components.QRCode = import "default" "./QRCode.module.scss"
 
 [<ReactComponent>]
 let QRCode () =
