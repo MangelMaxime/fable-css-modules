@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.2.0 - 2022-06-29
+
+### Fixed
+
+* Make the positional arguments optional. Before we couldn't provide a value to it, it would crash the CLI saying `Unkown argument: XXX`
+* Better normalize the `source` and `destinationFile`.
+
+    This help fix the "skip mechanism" of the `source` segment path from the generated `modules`
+
 ## 1.1.0 - 2022-06-29
 
 ### Changed
