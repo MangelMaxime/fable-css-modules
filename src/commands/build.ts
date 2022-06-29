@@ -11,7 +11,7 @@ type Options = {
     internal : boolean
 };
 
-export const command: string [] = [ "$0", "$0 <source>"];
+export const command: string = "$0 [source]";
 export const desc: string = 'Generate bindings for all the CSS modules in <source> folder to <outFile> file';
 
 export const builder: CommandBuilder<Options, Options> = (yargs) =>
