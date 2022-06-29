@@ -64,4 +64,7 @@ export const handler = async (argv: Arguments<Options>) => {
 
     // Write the content to the destination file
     await classCollector.writeToFile();
+
+    // Notify the user
+    console.log("Generation completed");
 };
