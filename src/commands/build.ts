@@ -4,6 +4,7 @@ import postcss from "postcss";
 import { ClassCollector } from "../classCollector";
 import { PostcssCollectorPlugin } from "../postcssCollectorPlugin";
 import { getCssContent } from "../css";
+import path from "path";
 
 type Options = {
     source: string;
@@ -35,8 +36,8 @@ export const builder: CommandBuilder<Options, Options> = (yargs) =>
         });
 
 export const handler = async (argv: Arguments<Options>) => {
-    const sourceFolder = argv.source.replace(/\\/g, '/');
-    const destinationFile = argv.outFile.replace(/\\/g, '/');
+    const sourceFolder = path.normalize(argv.source).replace(/\\/g, '/');
+    const destinationFile = path.normalize(argv.outFile).replace(/\\/g, '/');
 
     const entries = await fg(`${sourceFolder}/**/*.module.scss`);
 
