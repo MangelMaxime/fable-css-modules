@@ -128,15 +128,10 @@ export class ClassCollector {
     }
 
     moduleToText(sb: StringBuilder, module: Module, indent: number) {
-        if (module.subModules.length > 0 || module.classes.length > 0) {
-            sb.indent(indent);
-            sb.writeLine(`module ${module.name} =`);
-            sb.writeLine();
-        }
 
         if (module.classes.length > 0) {
-            sb.indent(indent + 1);
-            sb.writeLine(`type Classes =`);
+            sb.indent(indent);
+            sb.writeLine(`type ${module.name} =`);
             sb.writeLine();
 
             // The same class can be present mutiple times, for example when doing:
@@ -145,18 +140,24 @@ export class ClassCollector {
             const uniqueClassNames = module.classes.filter((v, i, a) => a.indexOf(v) === i);
 
             for (const className of uniqueClassNames) {
-                sb.indent(indent + 2);
+                sb.indent(indent + 1);
                 sb.writeLine("/// <summary>")
-                sb.indent(indent + 2);
+                sb.indent(indent + 1);
                 sb.writeLine(`/// Binding for <c>${className}</c> class`);
-                sb.indent(indent + 2);
+                sb.indent(indent + 1);
                 sb.writeLine("/// </summary>")
-                sb.indent(indent + 2);
+                sb.indent(indent + 1);
                 sb.writeLine(`[<Emit("$0[\\\"${className}\\\"]")>]`);
-                sb.indent(indent + 2);
+                sb.indent(indent + 1);
                 sb.writeLine(`abstract ${hyphenToCamelCase(className)} : string`);
                 sb.writeLine();
             }
+        }
+
+        if (module.subModules.length > 0) {
+            sb.indent(indent);
+            sb.writeLine(`module ${module.name} =`);
+            sb.writeLine();
         }
 
         for (const subModule of module.subModules) {
@@ -175,6 +176,7 @@ export class ClassCollector {
 //        Changes to this file will be lost when the code is regenerated.
 //------------------------------------------------------------------------------
 
+[<RequireQualifiedAccess>]
 module ${internalPrefix}CssModules
 
 open Fable.Core
