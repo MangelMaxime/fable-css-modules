@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.1.0 - 2022-06-29
+
+### Changed
+
+* Change from `XXX.YYY.ModuleName.Classes` to `XXX.YYY.ModuleName`
+
+    This makes the module path a bit less verbose.
+
+* Mark `CssModules` as `[<RequireQualifiedAccess>]`.
+
+    This will the simplification of module path, should make less verbose to access the classes and be still explicit enough.
+
 ## 1.0.0 - 2022-06-29
 
 ### Added
