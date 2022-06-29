@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.3.0 - 2022-06-29
+
+### Added
+
+* Add message when the generation is done.
+* Generate nothing if no CSS modules are found.
+
 ## 1.2.0 - 2022-06-29
 
 ### Fixed
