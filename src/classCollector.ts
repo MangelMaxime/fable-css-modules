@@ -167,6 +167,7 @@ export class ClassCollector {
 
     async writeToFile() {
         if (this._modules.length == 0) {
+            console.log("No classes found");
             return;
         }
 
