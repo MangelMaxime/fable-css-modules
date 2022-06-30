@@ -39,7 +39,10 @@ export class ClassCollector {
         let segments = [];
 
         if (relativePath.startsWith(this._sourceFolder)) {
-            segments = relativePath.replace(this._sourceFolder, "").split("/").slice(1);
+            segments =
+                relativePath.replace(this._sourceFolder, "")
+                            .split("/")
+                            .filter((segment) => segment !== ""); // Remove empty segments
         } else {
             segments = relativePath.split("/");
         }
