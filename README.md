@@ -16,7 +16,7 @@ let private classes : CssModules.Components.QRCode = import "default" "./QRCode.
 [<ReactComponent>]
 let QRCode () =
     Html.div [
-        prop.className classes.qrCode // Here you get completion the defined CSS classes
+        prop.className classes.qrCode // Here you get completion of the defined CSS classes
         prop.children [
             // ..
         ]
