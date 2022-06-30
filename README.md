@@ -7,7 +7,7 @@ Allowing you to leverage CSS modules in your Fable projects, in a **safe way**.
 ```fs
 module Components.QRCode
 
-open Fable.Core
+open Fable.Core.JsInterop
 open Feliz
 
 // Import the CSS module
@@ -105,7 +105,7 @@ You can now use the `CssModules` module in your Fable code.
 ```fs
 module Components.QRCode
 
-open Fable.Core
+open Fable.Core.JsInterop
 open Feliz
 
 let private classes : CssModules.Components.QRCode = import "default" "./QRCode.module.scss"
