@@ -41,8 +41,6 @@ export const handler = async (argv: Arguments<Options>) => {
 
     const entries = await fg(`${sourceFolder}/**/*.module.{css,scss,sass,less}`);
 
-    console.log(entries)
-
     const classCollector =
         new ClassCollector(
             process.cwd(),
