@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.4.0 - 2022-06-30
+
+### Fixed
+
+* Fix glob pattern to capture `css`, `scss` and `sass` files.
+* Try fix again the "skip mechanism", sometimes it was removing a module that should not be removed.
+
+### Added
+
+* Add a log in case no classes are found.
+
 ## 1.3.1 - 2022-06-29
 
 ### Fixed
