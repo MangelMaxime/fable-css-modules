@@ -39,7 +39,7 @@ export const handler = async (argv: Arguments<Options>) => {
     const sourceFolder = path.normalize(argv.source).replace(/\\/g, '/');
     const destinationFile = path.normalize(argv.outFile).replace(/\\/g, '/');
 
-    const entries = await fg(`${sourceFolder}/**/*.module.scss`);
+    const entries = await fg(`${sourceFolder}/**/*.module.{css,scss,sass,less}`);
 
     const classCollector =
         new ClassCollector(
