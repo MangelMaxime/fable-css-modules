@@ -32,7 +32,20 @@ This tools supports:
 - CSS modules identified by `*.module.scss`
 - SASS/SCSS modules identified by `*.module.sass` or `*.module.scss`
 
+## Installation
+
+`fable-css-modules` is an NPM tool and can be installed using a Node.js package manager.
+
+Example:
+
+```bash
+npm install fable-css-modules
+```
+
 ## Usage
+
+
+The tool can be call using `npx fable-css-modules` or `npx fcm`.
 
 ```shell
 fcm
@@ -62,7 +75,7 @@ src
             History.module.scss
 ```
 
-If you invoke `npx fcm` in the `src` folder, a file `src/CssModules.fs` will be generated with the following content:
+If you invoke `npx fcm` in the `src` folder, a file `CssModules.fs` will be generated in `src` with the following content:
 
 ```fs
 //-----------------------------------------------------------------------------
