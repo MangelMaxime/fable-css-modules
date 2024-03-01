@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.5.0 - 2024-02-01
+
+### Fixed
+
+* [GH-2](https://github.com/MangelMaxime/fable-css-modules/issues/2) Support files with a `.` in their module name
+
 ## 1.4.1 - 2022-06-30
 
 ### Removed
