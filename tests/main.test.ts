@@ -1,27 +1,6 @@
 import { expect, test } from 'vitest'
 import { handler } from '../src/commands/build'
 import { readFileSync } from "node:fs"
-import pino from "pino"
-
-test('adds 1 + 2 to equal 3', async () => {
-    const logs = new Array<string>()
-    const dest = {
-        write: (data: string) => logs.push(data),
-    }
-    const logger = pino({}, dest)
-
-    await handler({
-        source: "fixtures/noCssModules",
-        outFile: 'CssModules.fs',
-        internal: true,
-        _: [],
-        $0: ''
-    }, logger)
-
-    expect(logs).length(2)
-    expect(logs[0]).toContain("No classes found")
-    expect(logs[1]).toContain("Generation completed")
-})
 
 test('contains 1 class if there is one CSS Module', async () => {
     await handler({

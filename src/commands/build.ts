@@ -5,8 +5,6 @@ import { ClassCollector } from "../classCollector";
 import { PostcssCollectorPlugin } from "../postcssCollectorPlugin";
 import { getCssContent } from "../css";
 import path from "path";
-import pino from "pino";
-import type { Logger } from "pino";
 
 type Options = {
     source: string;
@@ -37,18 +35,7 @@ export const builder: CommandBuilder<Options, Options> = (yargs) =>
             default: '.'
         });
 
-export const handler = async (argv: Arguments<Options>, logger?: Logger<never>) => {
-    logger = logger || pino({
-        transport: {
-            target: 'pino-pretty',
-            options: {
-                levelFirst: true,
-                colorize: true,
-                ignore: 'pid,hostname'
-            }
-        }
-    });
-
+export const handler = async (argv: Arguments<Options>) => {
     const sourceFolder = path.normalize(argv.source).replace(/\\/g, '/');
     const destinationFile = path.normalize(argv.outFile).replace(/\\/g, '/');
 
@@ -59,8 +46,7 @@ export const handler = async (argv: Arguments<Options>, logger?: Logger<never>) 
             process.cwd(),
             sourceFolder,
             destinationFile,
-            argv.internal,
-            logger
+            argv.internal
         );
 
     for (const entry of entries) {
@@ -80,5 +66,5 @@ export const handler = async (argv: Arguments<Options>, logger?: Logger<never>) 
     await classCollector.writeToFile();
 
     // Notify the user
-    logger.info("Generation completed");
+    console.log("Generation completed");
 };

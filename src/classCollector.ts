@@ -2,7 +2,6 @@ import path from "path"
 import StringBuilder from "./stringBuilder"
 import { hyphenToCamelCase, isCssModule } from "./utils"
 import fs from "fs/promises"
-import type { Logger } from "pino"
 
 interface Module {
     name: string
@@ -17,14 +16,12 @@ export class ClassCollector {
     private _destination: string;
     private _sourceFolder : string;
     private _internal : boolean;
-    private _logger : Logger<never>;
 
-    constructor(cwd: string, sourceFolder : string, destination: string, internal : boolean, logger : Logger<never> ) {
+    constructor(cwd: string, sourceFolder : string, destination: string, internal : boolean) {
         this._cwd = cwd;
         this._sourceFolder = sourceFolder;
         this._destination = destination;
         this._internal = internal;
-        this._logger = logger;
     }
 
     /**
@@ -177,7 +174,7 @@ export class ClassCollector {
 
     async writeToFile() {
         if (this._modules.length == 0) {
-            this._logger.info("No classes found");
+            console.log("No classes found");
             return;
         }
 
