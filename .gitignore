@@ -272,3 +272,6 @@ docs_deploy/
 # Ignore generated API file
 docs/reference/
 build/
+
+# Don't track generated files
+tests/**/CssModules.fs

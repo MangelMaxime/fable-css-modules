@@ -44,7 +44,6 @@ npm install fable-css-modules
 
 ## Usage
 
-
 The tool can be call using `npx fable-css-modules` or `npx fcm`.
 
 ```shell
@@ -65,7 +64,7 @@ Options:
 
 Example:
 
-```
+```text
 src
 └─── Components
     │    QRCode.fs

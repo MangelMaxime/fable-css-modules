@@ -1,4 +1,4 @@
-export const cssModuleRegex = /\.module\.(css|scss|less)$/;
+export const cssModuleRegex = /\.module\.(css|scss|sass)$/;
 
 export const isCssModule = (fileName : string) => {
     return cssModuleRegex.test(fileName);

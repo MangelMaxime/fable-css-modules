@@ -2,6 +2,7 @@ import path from "path"
 import StringBuilder from "./stringBuilder"
 import { hyphenToCamelCase, isCssModule } from "./utils"
 import fs from "fs/promises"
+import type { Logger } from "pino"
 
 interface Module {
     name: string
@@ -16,12 +17,14 @@ export class ClassCollector {
     private _destination: string;
     private _sourceFolder : string;
     private _internal : boolean;
+    private _logger : Logger<never>;
 
-    constructor(cwd: string, sourceFolder : string, destination: string, internal : boolean) {
+    constructor(cwd: string, sourceFolder : string, destination: string, internal : boolean, logger : Logger<never> ) {
         this._cwd = cwd;
         this._sourceFolder = sourceFolder;
         this._destination = destination;
         this._internal = internal;
+        this._logger = logger;
     }
 
     /**
@@ -70,7 +73,11 @@ export class ClassCollector {
             throw "Panic: segments should not be empty";
         }
 
-        const currentSegment = originalCurrentSegment.replace(/\.module\.(css|scss|sass)/, "");
+        const currentSegment =
+            originalCurrentSegment
+            .replace(/\.module\.(css|scss|sass)/, "")
+            // Replace . with _ to generate valid F# module/class names
+            .replace(/\./, "_");
 
         const destinationModuleCandidate =
             knownModules.find((module) => {
@@ -170,7 +177,7 @@ export class ClassCollector {
 
     async writeToFile() {
         if (this._modules.length == 0) {
-            console.log("No classes found");
+            this._logger.info("No classes found");
             return;
         }
 

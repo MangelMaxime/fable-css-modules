@@ -5,11 +5,13 @@ import { ClassCollector } from "../classCollector";
 import { PostcssCollectorPlugin } from "../postcssCollectorPlugin";
 import { getCssContent } from "../css";
 import path from "path";
+import pino from "pino";
+import type { Logger } from "pino";
 
 type Options = {
     source: string;
     outFile: string;
-    internal : boolean
+    internal: boolean
 };
 
 export const command: string = "$0 [source]";
@@ -35,18 +37,30 @@ export const builder: CommandBuilder<Options, Options> = (yargs) =>
             default: '.'
         });
 
-export const handler = async (argv: Arguments<Options>) => {
+export const handler = async (argv: Arguments<Options>, logger?: Logger<never>) => {
+    logger = logger || pino({
+        transport: {
+            target: 'pino-pretty',
+            options: {
+                levelFirst: true,
+                colorize: true,
+                ignore: 'pid,hostname'
+            }
+        }
+    });
+
     const sourceFolder = path.normalize(argv.source).replace(/\\/g, '/');
     const destinationFile = path.normalize(argv.outFile).replace(/\\/g, '/');
 
-    const entries = await fg(`${sourceFolder}/**/*.module.{css,scss,sass,less}`);
+    const entries = await fg(`${sourceFolder}/**/*.module.{css,scss,sass}`);
 
     const classCollector =
         new ClassCollector(
             process.cwd(),
             sourceFolder,
             destinationFile,
-            argv.internal
+            argv.internal,
+            logger
         );
 
     for (const entry of entries) {
@@ -66,5 +80,5 @@ export const handler = async (argv: Arguments<Options>) => {
     await classCollector.writeToFile();
 
     // Notify the user
-    console.log("Generation completed");
+    logger.info("Generation completed");
 };
