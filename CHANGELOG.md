@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.6.0 - 2024-03-06
+
+### Changed
+
+* Do not sanitize `_` in class names
+
 ## 1.5.0 - 2024-02-01
 
 ### Fixed

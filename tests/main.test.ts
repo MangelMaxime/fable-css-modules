@@ -92,3 +92,16 @@ test("nested CSS is supported", async () => {
     const content = readFileSync("fixtures/nestedCss/CssModules.fs").toString()
     expect(content).toMatchSnapshot()
 })
+
+test("sanitize class name", async () => {
+    await handler({
+        source: "fixtures/sanitizeClasses",
+        outFile: 'fixtures/sanitizeClasses/CssModules.fs',
+        internal: true,
+        _: [],
+        $0: ''
+    })
+
+    const content = readFileSync("fixtures/sanitizeClasses/CssModules.fs").toString()
+    expect(content).toMatchSnapshot()
+})

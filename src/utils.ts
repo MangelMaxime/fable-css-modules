@@ -5,5 +5,5 @@ export const isCssModule = (fileName : string) => {
 }
 
 export const hyphenToCamelCase = (str : string) => {
-    return str.replace(/[-_](\w)/g, (_, p1) => p1.toUpperCase());
+    return str.replace(/[-](\w)/g, (_, p1) => p1.toUpperCase());
 }
