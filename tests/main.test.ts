@@ -7,6 +7,7 @@ test('contains 1 class if there is one CSS Module', async () => {
         source: "fixtures/oneCssModule",
         outFile: 'fixtures/oneCssModule/CssModules.fs',
         internal: true,
+        camelCase: false,
         _: [],
         $0: ''
     })
@@ -20,6 +21,7 @@ test('contains 1 class per CSS Module', async () => {
         source: "fixtures/multipleCssModules",
         outFile: 'fixtures/multipleCssModules/CssModules.fs',
         internal: true,
+        camelCase: false,
         _: [],
         $0: ''
     })
@@ -33,6 +35,7 @@ test('support CSS/SASS/SCSS modules', async () => {
         source: "fixtures/checkSupportedFormat",
         outFile: 'fixtures/checkSupportedFormat/CssModules.fs',
         internal: true,
+        camelCase: false,
         _: [],
         $0: ''
     })
@@ -46,6 +49,7 @@ test('if internal is set to false module should not be marked as internal ', asy
         source: "fixtures/notInternalModule",
         outFile: 'fixtures/notInternalModule/CssModules.fs',
         internal: false,
+        camelCase: false,
         _: [],
         $0: ''
     })
@@ -59,6 +63,7 @@ test('module name with a dot should be transformed to a valid F# identifier', as
         source: "fixtures/moduleWithDot",
         outFile: 'fixtures/moduleWithDot/CssModules.fs',
         internal: true,
+        camelCase: false,
         _: [],
         $0: ''
     })
@@ -72,6 +77,7 @@ test('nested folder is supported', async () => {
         source: "fixtures/nestedFolder",
         outFile: 'fixtures/nestedFolder/CssModules.fs',
         internal: true,
+        camelCase: false,
         _: [],
         $0: ''
     })
@@ -85,6 +91,7 @@ test("nested CSS is supported", async () => {
         source: "fixtures/nestedCss",
         outFile: 'fixtures/nestedCss/CssModules.fs',
         internal: true,
+        camelCase: false,
         _: [],
         $0: ''
     })
@@ -98,10 +105,25 @@ test("sanitize class name", async () => {
         source: "fixtures/sanitizeClasses",
         outFile: 'fixtures/sanitizeClasses/CssModules.fs',
         internal: true,
+        camelCase: false,
         _: [],
         $0: ''
     })
 
     const content = readFileSync("fixtures/sanitizeClasses/CssModules.fs").toString()
+    expect(content).toMatchSnapshot()
+})
+
+test("transformToCamelCase class name", async () => {
+    await handler({
+        source: "fixtures/transformToCamelCase",
+        outFile: 'fixtures/transformToCamelCase/CssModules.fs',
+        internal: true,
+        camelCase: true,
+        _: [],
+        $0: ''
+    })
+
+    const content = readFileSync("fixtures/transformToCamelCase/CssModules.fs").toString()
     expect(content).toMatchSnapshot()
 })

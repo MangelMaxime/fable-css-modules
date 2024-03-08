@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.7.0 - 2024-03-08
+
+### Changed
+
+* [BREAKING-CHANGE] Don't transform to `camelCase` by default. Instead escape using double backticks
+
 ## 1.6.0 - 2024-03-06
 
 ### Changed

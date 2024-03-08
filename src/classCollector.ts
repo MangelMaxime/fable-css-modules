@@ -1,6 +1,6 @@
 import path from "path"
 import StringBuilder from "./stringBuilder"
-import { hyphenToCamelCase, isCssModule } from "./utils"
+import { sanitizeClassName, isCssModule } from "./utils"
 import fs from "fs/promises"
 
 interface Module {
@@ -16,12 +16,14 @@ export class ClassCollector {
     private _destination: string;
     private _sourceFolder : string;
     private _internal : boolean;
+    private _toCamelCase : boolean;
 
-    constructor(cwd: string, sourceFolder : string, destination: string, internal : boolean) {
+    constructor(cwd: string, sourceFolder : string, destination: string, internal : boolean, toCamelCase : boolean) {
         this._cwd = cwd;
         this._sourceFolder = sourceFolder;
         this._destination = destination;
         this._internal = internal;
+        this._toCamelCase = toCamelCase;
     }
 
     /**
@@ -156,7 +158,7 @@ export class ClassCollector {
                 sb.indent(indent + 1);
                 sb.writeLine(`[<Emit("$0[\\\"${className}\\\"]")>]`);
                 sb.indent(indent + 1);
-                sb.writeLine(`abstract ${hyphenToCamelCase(className)} : string`);
+                sb.writeLine(`abstract ${sanitizeClassName(className, this._toCamelCase)} : string`);
                 sb.writeLine();
             }
         }

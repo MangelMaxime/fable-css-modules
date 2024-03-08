@@ -5,5 +5,17 @@ export const isCssModule = (fileName : string) => {
 }
 
 export const hyphenToCamelCase = (str : string) => {
-    return str.replace(/[-](\w)/g, (_, p1) => p1.toUpperCase());
+    return str.replace(/([-]+)(\w)/g, (_, _g1, g2) => g2.toUpperCase());
+}
+
+export const sanitizeClassName = (str : string, transformToCamelCase : boolean) => {
+    if (transformToCamelCase) {
+        return hyphenToCamelCase(str);
+    } else {
+        if (str.indexOf("-") !== -1) {
+            return "``" + str + "``";
+        } else {
+            return str;
+        }
+    }
 }

@@ -9,7 +9,8 @@ import path from "path";
 type Options = {
     source: string;
     outFile: string;
-    internal: boolean
+    internal: boolean;
+    camelCase: boolean;
 };
 
 export const command: string = "$0 [source]";
@@ -27,6 +28,11 @@ export const builder: CommandBuilder<Options, Options> = (yargs) =>
                 describe: 'Mark the generated module as internal',
                 type: 'boolean',
                 default: true
+            },
+            camelCase: {
+                describe: 'Transform the class names to camelCase',
+                type: 'boolean',
+                default: false
             }
         })
         .positional("source", {
@@ -46,7 +52,8 @@ export const handler = async (argv: Arguments<Options>) => {
             process.cwd(),
             sourceFolder,
             destinationFile,
-            argv.internal
+            argv.internal,
+            argv.camelCase
         );
 
     for (const entry of entries) {
