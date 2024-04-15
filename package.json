@@ -1,12 +1,15 @@
 {
     "name": "fable-css-modules",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "description": "Generate Fable bindings for your CSS modules classes",
     "main": "index.js",
     "bin": {
         "fable-css-modules": "build/cli.js",
         "fcm": "build/cli.js"
     },
+    "files": [
+        "build"
+    ],
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
