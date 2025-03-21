@@ -105,7 +105,7 @@ module Components =
             /// Binding for <c>history-container</c> class
             /// </summary>
             [<Emit("$0[\"history-container\"]")>]
-            abstract history-container : string
+            abstract ``history-container`` : string
 ```
 
 You should now add `<Compile Include="CssModules.fs" />` to your fsproj file.
